@@ -1,0 +1,9 @@
+node_modules/
+dist/
+contracts/out/
+contracts/cache/
+contracts/broadcast/
+.env
+.env.local
+*.log
+.DS_Store

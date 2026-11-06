@@ -1,0 +1,148 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" width="1600" height="900" font-family="Archivo, Arial, Helvetica, sans-serif">
+  <title>ParaCat Recovery Notes architecture</title>
+  <defs>
+    <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#34505e" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arw" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1L9 5L1 9" fill="none" stroke="#1d7385" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+  <rect width="1600" height="900" fill="#edf2f3"/>
+
+  <text x="60" y="64" font-size="30" font-weight="700" fill="#0f2430">ParaCat Recovery Notes: how the prototype is built</text>
+  <text x="60" y="94" font-size="17" fill="#34505e">Three layers, as required: smart contracts, an interactive frontend, and a deployment on an Ethereum test network (Sepolia).</text>
+
+  <!-- Layer headers -->
+  <text x="60" y="146" font-size="15" font-weight="700" fill="#5f7480">Who uses it</text>
+  <text x="400" y="146" font-size="15" font-weight="700" fill="#5f7480">Layer 2: interactive frontend</text>
+  <text x="760" y="146" font-size="15" font-weight="700" fill="#5f7480">Layers 1 and 3: smart contracts, deployed on Sepolia</text>
+
+  <!-- People -->
+  <g font-size="15" fill="#0f2430">
+    <rect x="60" y="164" width="290" height="88" rx="6" fill="#fff" stroke="#d2dde1"/>
+    <text x="78" y="194" font-weight="700">Investors</text>
+    <text x="78" y="218" fill="#34505e" font-size="14">ILS funds, pension funds, family offices</text>
+    <text x="78" y="238" fill="#34505e" font-size="14">Subscribe, earn coupons, trade notes</text>
+
+    <rect x="60" y="266" width="290" height="88" rx="6" fill="#fff" stroke="#d2dde1"/>
+    <text x="78" y="296" font-weight="700">Insurers (cedents)</text>
+    <text x="78" y="320" fill="#34505e" font-size="14">Manila, Ho Chi Minh City, Jakarta</text>
+    <text x="78" y="340" fill="#34505e" font-size="14">Pay premium, receive payouts</text>
+
+    <rect x="60" y="368" width="290" height="88" rx="6" fill="#fff" stroke="#d2dde1"/>
+    <text x="78" y="398" font-weight="700">Parapet Digital</text>
+    <text x="78" y="422" fill="#34505e" font-size="14">Issuer, servicing and transfer agent</text>
+    <text x="78" y="442" fill="#34505e" font-size="14">Onboards investors, closes the book</text>
+
+    <rect x="60" y="470" width="290" height="88" rx="6" fill="#fff" stroke="#d2dde1"/>
+    <text x="78" y="500" font-weight="700">Data providers</text>
+    <text x="78" y="524" fill="#34505e" font-size="14">River gauge telemetry + satellite</text>
+    <text x="78" y="544" fill="#34505e" font-size="14">rainfall, two independent feeds</text>
+
+    <rect x="60" y="572" width="290" height="88" rx="6" fill="#fff" stroke="#d2dde1"/>
+    <text x="78" y="602" font-weight="700">Independent guardian</text>
+    <text x="78" y="626" fill="#34505e" font-size="14">Can dispute a faulty trigger during</text>
+    <text x="78" y="646" fill="#34505e" font-size="14">the dispute window, then cannot block</text>
+  </g>
+
+  <!-- Frontend -->
+  <rect x="400" y="164" width="310" height="496" rx="8" fill="#0f2430"/>
+  <g fill="#e6eef0" font-size="14">
+    <text x="420" y="196" font-size="18" font-weight="700" fill="#fff">ParaCat web app</text>
+    <text x="420" y="220" fill="#9fd3dc">React + Vite + viem</text>
+    <rect x="420" y="240" width="270" height="34" rx="4" fill="#1c3746"/><text x="434" y="262">Overview: live gauges, collateral</text>
+    <rect x="420" y="282" width="270" height="34" rx="4" fill="#1c3746"/><text x="434" y="304">Invest: subscribe, coupons, transfer</text>
+    <rect x="420" y="324" width="270" height="34" rx="4" fill="#1c3746"/><text x="434" y="346">Cedents: premium, district plan</text>
+    <rect x="420" y="366" width="270" height="34" rx="4" fill="#1c3746"/><text x="434" y="388">Trigger monitor: oracle to payout</text>
+    <rect x="420" y="408" width="270" height="34" rx="4" fill="#1c3746"/><text x="434" y="430">Operations: KYC, lifecycle, issue</text>
+    <text x="420" y="480" font-weight="700" fill="#fff">Wallet connection</text>
+    <text x="420" y="504">MetaMask or Privy (as in Lab 2)</text>
+    <text x="420" y="526">Local demo: role switcher</text>
+    <text x="420" y="570" font-weight="700" fill="#fff">Every transaction</text>
+    <text x="420" y="594">simulate, sign, submit, confirm,</text>
+    <text x="420" y="616">refresh. Reads poll the chain and</text>
+    <text x="420" y="638">decode events into an audit feed.</text>
+  </g>
+  <line x1="352" y1="410" x2="396" y2="410" stroke="#34505e" stroke-width="1.6" marker-end="url(#ar)"/>
+  <line x1="712" y1="410" x2="756" y2="410" stroke="#34505e" stroke-width="1.6" marker-end="url(#ar)"/>
+  <text x="716" y="400" font-size="12" fill="#5f7480">RPC</text>
+
+  <!-- Chain container -->
+  <rect x="760" y="164" width="780" height="620" rx="10" fill="#fff" stroke="#9fb3bb" stroke-dasharray="6 5"/>
+  <text x="780" y="192" font-size="14" fill="#5f7480">Ethereum Sepolia testnet (local Anvil chain for rehearsal)</text>
+
+  <!-- Factory -->
+  <rect x="780" y="208" width="740" height="62" rx="6" fill="#d9edf0" stroke="#1d7385"/>
+  <text x="800" y="236" font-size="17" font-weight="700" fill="#0f2430">ParaCat Issuance Platform (factory)</text>
+  <text x="800" y="258" font-size="14" fill="#34505e">Issues each programme as an EIP-1167 clone of one audited template. Charges Parapet's 0.5% issuance fee.</text>
+  <line x1="1150" y1="272" x2="1150" y2="300" stroke="#1d7385" stroke-width="1.6" marker-end="url(#arw)"/>
+
+  <!-- Programme -->
+  <rect x="780" y="304" width="740" height="290" rx="8" fill="#0f2430"/>
+  <text x="800" y="334" font-size="18" font-weight="700" fill="#fff">ParaCat Recovery Notes programme (one per deal)</text>
+  <text x="800" y="356" font-size="14" fill="#9fd3dc">Replaces the SPV, trustee and paying agent of a traditional cat bond</text>
+  <g font-size="14">
+    <rect x="800" y="372" width="346" height="100" rx="5" fill="#1c3746"/>
+    <text x="816" y="398" font-weight="700" fill="#fff">Permissioned note (ERC-3643 style)</text>
+    <text x="816" y="422" fill="#d4e2e6">Only verified, eligible wallets can hold</text>
+    <text x="816" y="442" fill="#d4e2e6">or receive. Freeze and forced transfer</text>
+    <text x="816" y="462" fill="#d4e2e6">for the transfer agent.</text>
+
+    <rect x="1156" y="372" width="346" height="100" rx="5" fill="#1c3746"/>
+    <text x="1172" y="398" font-weight="700" fill="#fff">Collateral vault</text>
+    <text x="1172" y="422" fill="#d4e2e6">20% instant stablecoin buffer, 80% in a</text>
+    <text x="1172" y="442" fill="#d4e2e6">tokenised MMF earning yield. Visible</text>
+    <text x="1172" y="462" fill="#d4e2e6">on-chain at every moment.</text>
+
+    <rect x="800" y="482" width="346" height="100" rx="5" fill="#1c3746"/>
+    <text x="816" y="508" font-weight="700" fill="#fff">Parametric trigger</text>
+    <text x="816" y="532" fill="#d4e2e6">Dual trigger (rain AND river), tiers pay</text>
+    <text x="816" y="552" fill="#d4e2e6">50% then 100%, dispute window, payout</text>
+    <text x="816" y="572" fill="#d4e2e6">straight to the insurer's wallet.</text>
+
+    <rect x="1156" y="482" width="346" height="100" rx="5" fill="#1c3746"/>
+    <text x="1172" y="508" font-weight="700" fill="#fff">Coupon engine and maturity</text>
+    <text x="1172" y="532" fill="#d4e2e6">Premiums minus Parapet's 5% fee plus</text>
+    <text x="1172" y="552" fill="#d4e2e6">MMF yield, paid pro rata. Remaining</text>
+    <text x="1172" y="572" fill="#d4e2e6">principal redeemed at maturity.</text>
+  </g>
+
+  <!-- Supporting contracts -->
+  <g font-size="14">
+    <rect x="780" y="636" width="176" height="128" rx="6" fill="#fff" stroke="#9fb3bb"/>
+    <text x="796" y="662" font-weight="700" fill="#0f2430">Identity Registry</text>
+    <text x="796" y="686" fill="#34505e">KYC, accreditation,</text>
+    <text x="796" y="706" fill="#34505e">country, expiry</text>
+    <text x="796" y="736" fill="#1d7385" font-size="13">isVerified(wallet)</text>
+
+    <rect x="968" y="636" width="176" height="128" rx="6" fill="#fff" stroke="#9fb3bb"/>
+    <text x="984" y="662" font-weight="700" fill="#0f2430">Flood Data Oracle</text>
+    <text x="984" y="686" fill="#34505e">Quorum of feeds,</text>
+    <text x="984" y="706" fill="#34505e">freshness, lower median</text>
+    <text x="984" y="736" fill="#1d7385" font-size="13">consensus(station)</text>
+
+    <rect x="1156" y="636" width="176" height="128" rx="6" fill="#fff" stroke="#9fb3bb"/>
+    <text x="1172" y="662" font-weight="700" fill="#0f2430">Tokenised MMF</text>
+    <text x="1172" y="686" fill="#34505e">Accruing NAV, instant</text>
+    <text x="1172" y="706" fill="#34505e">or T+1 redemption</text>
+    <text x="1172" y="736" fill="#1d7385" font-size="13">ERC-7540 style</text>
+
+    <rect x="1344" y="636" width="176" height="128" rx="6" fill="#fff" stroke="#9fb3bb"/>
+    <text x="1360" y="662" font-weight="700" fill="#0f2430">tUSDC</text>
+    <text x="1360" y="686" fill="#34505e">Test stablecoin for</text>
+    <text x="1360" y="706" fill="#34505e">subscriptions, premiums</text>
+    <text x="1360" y="726" fill="#34505e">and payouts</text>
+  </g>
+  <g stroke="#34505e" stroke-width="1.6" fill="none">
+    <line x1="868" y1="596" x2="868" y2="632" marker-end="url(#ar)"/>
+    <line x1="1056" y1="596" x2="1056" y2="632" marker-end="url(#ar)"/>
+    <line x1="1244" y1="596" x2="1244" y2="632" marker-end="url(#ar)" marker-start="url(#ar)"/>
+    <line x1="1432" y1="596" x2="1432" y2="632" marker-end="url(#ar)" marker-start="url(#ar)"/>
+  </g>
+  <line x1="352" y1="514" x2="378" y2="514" stroke="#34505e" stroke-width="1.2" stroke-dasharray="4 4"/>
+  <path d="M378 514 L378 812 L1056 812 L1056 768" fill="none" stroke="#34505e" stroke-width="1.2" stroke-dasharray="4 4" marker-end="url(#ar)"/>
+  <text x="400" y="804" font-size="13" fill="#5f7480">Feeds sign readings directly to the oracle (Chainlink in production)</text>
+
+  <text x="60" y="860" font-size="14" fill="#5f7480">Built with Foundry, OpenZeppelin 5.4, Solidity 0.8.24, React 19, viem 2. 27 automated tests, including a fuzz test that coupons owed never exceed cash reserved.</text>
+</svg>
